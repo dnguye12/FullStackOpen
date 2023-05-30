@@ -1,0 +1,16 @@
+.noti {
+    font-weight: 600;
+    font-size: 20px;
+    padding: 12px 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    text-align: center;
+}
+.noti-success {
+    background: #DCEDC8;
+    color: #33691E;
+}
+
+.noti-fail {
+    background: #FFCCBC;
+    color: #b71c1c;
+}
