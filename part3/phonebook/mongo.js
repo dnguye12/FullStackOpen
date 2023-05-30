@@ -19,6 +19,31 @@ const noteSchema = new mongoose.Schema({
 
 const Person = mongoose.model('Person', noteSchema);
 
+let phonebook = [
+    {
+        "id": 1,
+        "name": "Arto Hellas",
+        "number": "040-123456"
+    },
+    {
+        "id": 2,
+        "name": "Ada Lovelace",
+        "number": "39-44-5323523"
+    },
+    {
+        "id": 3,
+        "name": "Dan Abramov",
+        "number": "12-43-234345"
+    },
+    {
+        "id": 4,
+        "name": "Mary Poppendieck",
+        "number": "39-23-6423122"
+    }
+];
+
+/*
+
 if (process.argv.length >= 5) {
     const inputName = process.argv[3];
     const inputTele = process.argv[4];
@@ -38,4 +63,14 @@ if (process.argv.length >= 5) {
         result.forEach(p => console.log(p))
         mongoose.connection.close();
     })
-}
+}*/
+
+let promise = phonebook.map(n => {
+    const note = new Person({name: n.name, number: n.number});
+    return note.save();
+})
+
+Promise.all(promise).then(result => {
+    console.log('notes saved!')
+    mongoose.connection.close()
+})
