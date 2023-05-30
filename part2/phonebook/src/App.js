@@ -59,16 +59,22 @@ const App = () => {
           name: newName,
           number: newNumber,
         }
-        setMsgS(
-          `${newName} has been added to server`
-        )
-        setTimeout(() => {
-          setMsgS(null)
-        }, 5000)
+
         services.create(helper).then(response => {
           setPersons(persons.concat(response));
+          setMsgS(
+            `${newName} has been added to server`
+          )
+          setTimeout(() => {
+            setMsgS(null)
+          }, 5000)
           setNewName('');
           setNewNumber('');
+        }).catch(error => {
+          setMsgF(error.message);
+          setTimeout(() => {
+            setMsgF(null)
+          }, 5000);
         })
       }
     }
