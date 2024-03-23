@@ -39,7 +39,7 @@ const PersonForm = ({ addPerson, newName, handleNewNameChange, newNumber, handle
 }
 
 const Notification = ({ message, type }) => {
-  if (message === null) {
+  if (message === null || type === '') {
     return null
   }
   return (
@@ -55,6 +55,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [notiMessage, setNotiMessage] = useState('')
+  const [notiType, setNotiType] = useState('')
 
   useEffect(() => {
     personService
@@ -90,6 +91,12 @@ const App = () => {
           .update(person.id, personObject)
           .then(res => {
             setPersons(persons.map(p => p.id === person.id ? personObject : p))
+            setNotiMessage(`Updated ${person.name} number`)
+            setNotiType('success')
+            setTimeout(() => {
+              setNotiMessage('')
+              setNotiType('')
+            })
           })
       }
     } else {
@@ -102,6 +109,12 @@ const App = () => {
         .then(res => {
           setPersons(persons.concat(res))
         })
+      setNotiMessage(`Added ${person.name} number`)
+      setNotiType('success')
+      setTimeout(() => {
+        setNotiMessage('')
+        setNotiType('')
+      })
     }
     setNewName('')
     setNewNumber('')
@@ -120,7 +133,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={notiMessage}/>
+      <Notification message={notiMessage} type={notiType} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <PersonForm addPerson={addPerson} newName={newName} handleNewNameChange={handleNewNameChange} newNumber={newNumber} handleNewNumberChange={handleNewNumberChange} />
       <Numbers persons={persons} filter={filter} deletePerson={deletePerson} />
