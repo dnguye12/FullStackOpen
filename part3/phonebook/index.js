@@ -7,6 +7,7 @@ app.use(cors())
 morgan.token('body', (request) => JSON.stringify(request.body))
 app.use(express.json())
 app.use(morgan('tiny'))
+app.use(express.static('dist'))
 
 const postMorgan = morgan(':method :url :status :res[content-length] - :response-time ms :body')
 
@@ -81,6 +82,12 @@ app.post('/api/persons',postMorgan, (request, response) => {
         persons = persons.concat(person)
         response.json(person)
     }
+})
+
+app.put('/api/persons/:id', (request, response) => {
+    const person = request.body
+    persons = persons.map(p => p.id === person.id ? person : p)
+    response.json(person)
 })
 
 const PORT = process.env.PORT || 3001

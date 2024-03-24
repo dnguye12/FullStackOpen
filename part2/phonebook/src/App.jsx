@@ -109,7 +109,7 @@ const App = () => {
         .then(res => {
           setPersons(persons.concat(res))
         })
-      setNotiMessage(`Added ${person.name} number`)
+      setNotiMessage(`Added ${personObject.name} number`)
       setNotiType('success')
       setTimeout(() => {
         setNotiMessage('')
