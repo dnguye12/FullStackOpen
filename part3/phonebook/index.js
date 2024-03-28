@@ -72,11 +72,7 @@ app.delete('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons', postMorgan, (request, response, next) => {
     const body = request.body
-    if (!body.name || !body.number) {
-        response.status(404).json({
-            error: 'name or number missing'
-        }).end()
-    } else if (persons.find(p => p.name === body.name)) {
+    if (persons.find(p => p.name === body.name)) {
         response.status(404).json({
             error: 'name must be unique'
         }).end()
@@ -97,9 +93,9 @@ app.post('/api/persons', postMorgan, (request, response, next) => {
 })
 
 app.put('/api/persons/:id', (request, response) => {
-    const {name, number} = request.body
-    
-    Person.findByIdAndUpdate(request.params.id, {name, number}, { new: true, runValidators: true, context: 'query' })
+    const { name, number } = request.body
+
+    Person.findByIdAndUpdate(request.params.id, { name, number }, { new: true, runValidators: true, context: 'query' })
         .then(updatedPerson => {
             response.json(updatedPerson)
             persons = persons.map(p => p.id === updatedPerson.id ? updatedPerson : p)
