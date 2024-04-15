@@ -3,10 +3,11 @@ import { voteAnecdote } from '../reducers/anecdoteReducer'
 
 const AnecdoteList = () => {
     const anecdotes = useSelector(state => {
+        let helper = [...state.anecdotes]
         if(state.filter === '') {
-            return state.anecdotes.sort((a, b) => b.votes - a.votes)
+            return helper.sort((a, b) => b.votes - a.votes)
         }else {
-            return state.anecdotes.filter((a) => a.content.toLowerCase().includes(state.filter.toLowerCase())).sort((a, b) => b.votes - a.votes)
+            return helper.filter((a) => a.content.toLowerCase().includes(state.filter.toLowerCase())).sort((a, b) => b.votes - a.votes)
         }
         
     })
