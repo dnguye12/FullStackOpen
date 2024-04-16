@@ -5,8 +5,8 @@ import filterReducer from './reducers/filerReducer'
 
 const store = configureStore({
     reducer: {
-            anecdotes: anecdoteReducer,
-            filter: filterReducer
+        anecdotes: anecdoteReducer,
+        filter: filterReducer
     }
 })
 
