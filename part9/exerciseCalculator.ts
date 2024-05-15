@@ -27,7 +27,7 @@ const parseArguments2 = (args: string[]): number[] => {
 }
 
 const calculateExercises = (input: number[]): calculateValues => {
-    const target: number = input.pop();
+    const target: any = input.pop();
 
     const periodLength: number = input.length;
     let trainingDays: number = 0;
@@ -42,7 +42,7 @@ const calculateExercises = (input: number[]): calculateValues => {
     let average: number = total / periodLength;
     let success: boolean = target > average ? false : true;
     let rating: number = success ? 3 : total === 0 ? 1 : 2;
-    let ratingDescription: string;
+    let ratingDescription: string = '';
     switch (rating) {
         case 1:
             ratingDescription = '🤮';

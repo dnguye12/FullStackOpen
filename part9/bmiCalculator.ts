@@ -24,17 +24,17 @@ const parseArguments = (args: string[]): Values => {
 const calculateBmi = (height: number, weight: number) => {
     const helper: number = weight / Math.pow(height / 100, 2);
     if (helper < 18.4) {
-        console.log("Underweight");
+        return "Underweight";
     } else if (helper >= 25) {
-        console.log("Overweight");
+        return "Overweight";
     } else {
-        console.log("Normal range");
+        return "Normal range";
     }
 }
 
 try {
     const { height, weight } = parseArguments(process.argv);
-    calculateBmi(height, weight);
+    console.log(calculateBmi(height, weight));
 } catch (error: unknown) {
     let errorMessage = 'Something bad happened.'
     if (error instanceof Error) {
@@ -42,3 +42,5 @@ try {
     }
     console.log(errorMessage);
 }
+
+export default calculateBmi;
